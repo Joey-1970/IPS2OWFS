@@ -66,7 +66,7 @@
 			else {
 				Echo "Syntax der Device ID inkorrekt!";
 				$this->SendDebug("ApplyChanges", "Syntax der Device ID inkorrekt!", 0);
-				$this->SetStatus(203);
+				$this->SetStatus(202);
 			}
 		}
 		else {
