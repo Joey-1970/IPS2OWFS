@@ -8,7 +8,7 @@
     "IPS2OWFS_Splitter"
   ],
   "parentRequirements": [],
-  "childRequirements": [],
-  "implemented": [],
+  "childRequirements": ["{4E023AF0-7B59-FD5F-37EB-AC1BC8CD5EAE}"],
+  "implemented": ["{F1CAC7F7-BA28-F711-7E0E-481F338200A4}"],
   "prefix": "IPS2OWFSSplitter"
 }
