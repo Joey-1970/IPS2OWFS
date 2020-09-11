@@ -1,0 +1,14 @@
+{
+  "id": "{562389F8-739F-644A-4FC7-36F2CE3AFE4F}",
+  "name": "IPS2TradfriSplitter",
+  "type": 2,
+  "vendor": "JP-IPS-Modules",
+  "aliases":
+  [
+    "IPSTradfriSplitter"
+  ],
+  "parentRequirements": [],
+  "childRequirements": ["{D63AA852-D72B-258B-6AF5-689C8B62AF02}"],
+  "implemented": ["{4AA318CB-CA9A-2467-3079-A35AD1577771}"],
+  "prefix": "IPS2TradfriSplitter"
+}
