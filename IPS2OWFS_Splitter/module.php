@@ -61,14 +61,28 @@
 	    	$data = json_decode($JSONString);
 	    	$Result = false;
 	 	switch ($data->Function) {
-			case "getDeviceList":
-				
+			case "DeviceState":
+				$Result = $this->DeviceState("28.9B653B332001");
 				break;
 		}
 	return $Result;
 	}
 	    
 	// Beginn der Funktionen
+	private function DeviceState($DeviceID)
+	{
+		If ($this->ReadPropertyBoolean("Open") == true) {
+			$GatewayIP = $this->ReadPropertyString("GatewayIP");
+			$Port = $this->ReadPropertyInteger("Port");				
+			$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$DeviceID);
+			$Content = json_decode($Content);
+			$this->SendDebug("Netzanbindung", "Temperatur: ".$Content->temperature, 0);			
+			
+			return $Content->temperature
+;			
+		}
+	}
+	  
 	private function ConnectionTest()
 	{
 	      	$result = false;
