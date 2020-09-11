@@ -110,7 +110,7 @@
 					"Function" => "DeviceState", "DeviceID" => $this->ReadPropertyString("DeviceID") )));
 			$this->SendDebug("GetState", "Ergebnis: ".$Result, 0);
 			
-			
+			$this->SetValue("Temperature", $Result);
 			
 		}
 	}
