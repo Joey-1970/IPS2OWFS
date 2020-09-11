@@ -39,7 +39,7 @@
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$IP = $this->ReadPropertyString("GatewayIP");
 			If (filter_var($IP, FILTER_VALIDATE_IP)) {
-				
+				$this->ConnectionTest();
 				$this->SetStatus(102);
 			}
 			else {
@@ -69,8 +69,34 @@
 	}
 	    
 	// Beginn der Funktionen
-	
-	
+	private function ConnectionTest()
+	{
+	      	$result = false;
+		$GatewayIP = $this->ReadPropertyString("GatewayIP");
+		$Port = $this->ReadPropertyInteger("Port");	 
+		If (Sys_Ping($GatewayIP, 500)) {
+		      	// IP reagiert
+		      	$this->SendDebug("Netzanbindung", "Angegebene IP ".$GatewayIP." reagiert", 0);
+			$status = @fsockopen($GatewayIP, $Port, $errno, $errstr, 10);
+				if (!$status) {
+					IPS_LogMessage("IPS2OWFS Netzanbindung: ","Port ist geschlossen!");
+					$this->SendDebug("Netzanbindung", "Port ist geschlossen!", 0);
+					$this->SetStatus(104);
+	   			}
+	   			else {
+	   				fclose($status);
+					$this->SendDebug("Netzanbindung", "Port ist geoeffnet", 0);
+					$result = true;
+					$this->SetStatus(102);
+	   			}
+		}
+		else {
+			IPS_LogMessage("IPS2OWFS Netzanbindung: ","IP ".$GatewayIP." reagiert nicht!");
+			$this->SendDebug("Netzanbindung", "IP ".$GatewayIP." reagiert nicht!", 0);
+			$this->SetStatus(104);
+		}
+	return $result;
+	}	
 	
 	  
 	
