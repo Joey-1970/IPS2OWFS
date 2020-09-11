@@ -7,8 +7,8 @@
   [
     "IPS2OWFS_DS18B20"
   ],
-  "parentRequirements": [],
+  "parentRequirements": ["{F1CAC7F7-BA28-F711-7E0E-481F338200A4}"],
   "childRequirements": [],
-  "implemented": [],
+  "implemented": ["{4E023AF0-7B59-FD5F-37EB-AC1BC8CD5EAE}"],
   "prefix": "IPS2OWFSDS18B20"
 }
