@@ -55,7 +55,7 @@
             	parent::ApplyChanges();
 		
 		If (($this->ReadPropertyBoolean("Open") == true) AND (IPS_GetKernelRunlevel() == KR_READY)) {
-			If ($this->ReadPropertyInteger("DeviceID") >= 65537) {
+			If ($this->ReadPropertyString("DeviceID") <> "") {
 				$this->SetStatus(102);
 				If (IPS_GetKernelRunlevel() == KR_READY) {
 					
