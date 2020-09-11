@@ -1,0 +1,12 @@
+{
+  "id": "{180B3EDB-AE36-263E-ACC8-13947B32C4AA}",
+  "author": "Joachim Päper",
+  "name": "IPS2OWFS",
+  "url": "www.ip-symcon.de",
+  "compatibility": {
+        "version": "5.1"
+  },
+  "version": "1.0",
+  "build": 0,
+  "date": 0
+}
