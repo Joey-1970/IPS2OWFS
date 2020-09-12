@@ -108,9 +108,10 @@
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{F1CAC7F7-BA28-F711-7E0E-481F338200A4}", 
 					"Function" => "DeviceState", "DeviceID" => $this->ReadPropertyString("DeviceID") )));
-			$this->SendDebug("GetState", "Ergebnis: ".$Result, 0);
-			
-			$this->SetValue("Temperature", $Result);
+			//$this->SendDebug("GetState", "Ergebnis: ".$Result, 0);
+			$Content = json_decode($Result);
+			$this->SendDebug("GetState", "Temperatur: ".$Content->temperature, 0);	
+			$this->SetValue("Temperature", $Content->temperature);
 			
 		}
 	}
