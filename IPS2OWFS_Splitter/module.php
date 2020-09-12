@@ -75,10 +75,10 @@
 			$GatewayIP = $this->ReadPropertyString("GatewayIP");
 			$Port = $this->ReadPropertyInteger("Port");				
 			$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$DeviceID);
-			$Content = json_decode($Content);
-			$this->SendDebug("Netzanbindung", "Temperatur: ".$Content->temperature, 0);			
+			//$Content = json_decode($Content);
+			//$this->SendDebug("Netzanbindung", "Temperatur: ".$Content->temperature, 0);			
 			
-			return $Content->temperature
+			return $Content
 ;			
 		}
 	}
