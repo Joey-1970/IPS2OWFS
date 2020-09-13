@@ -87,21 +87,24 @@
 	
 	private function DeviceList()
 	{
+		$DeviceArray = array();
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$GatewayIP = $this->ReadPropertyString("GatewayIP");
 			$Port = $this->ReadPropertyInteger("Port");
 			$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/');
 			$Content = json_decode($Content, true);
-
+			
 			foreach ($Content as $Device => $Value) {
     				$DeviceFilter = str_replace(".", "", $Device);
     				If (ctype_xdigit ($DeviceFilter) == true) {
         				$DeviceInfo = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$Device);
         				$DeviceInfo = json_decode($DeviceInfo, true);
-        				//echo $DeviceInfo['type']."  ";
+					$DeviceArray[$Device]['address'] = $DeviceInfo['address'];
+        				$DeviceArray[$Device]['type'] = $DeviceInfo['type'];
     				}
    			}
 		}
+	return $DeviceArray;
 	}
 	    
 	    
