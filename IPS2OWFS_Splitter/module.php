@@ -84,7 +84,7 @@
 				$this->ConnectionTest();
 			}
 					
-		return $Content
+		return $Content;
 		}
 	}
 	
