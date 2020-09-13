@@ -62,7 +62,10 @@
 	    	$Result = false;
 	 	switch ($data->Function) {
 			case "DeviceState":
-				$Result = $this->DeviceState("28.9B653B332001");
+				$Result = $this->DeviceState($data->DeviceID);
+				break;
+			case "DeviceList":
+				$Result = $this->DeviceList();
 				break;
 		}
 	return $Result;
@@ -103,8 +106,9 @@
         				$DeviceArray[$Device]['type'] = $DeviceInfo['type'];
     				}
    			}
+			$this->SendDebug("DeviceList", serialize($DeviceArray), 0);
 		}
-	return $DeviceArray;
+	return serialize($DeviceArray);
 	}
 	    
 	    
