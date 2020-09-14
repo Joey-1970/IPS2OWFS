@@ -99,7 +99,7 @@
 			
 			foreach ($Content as $Device => $Value) {
     				$DeviceFilter = str_replace(".", "", $Device);
-    				If ((ctype_xdigit ($DeviceFilter) == true) AND (strlen($this->ReadPropertyString("DeviceID")) == 15)) {
+    				If ((ctype_xdigit ($DeviceFilter) == true) AND (strlen($Device) == 15)) {
         				$DeviceInfo = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$Device);
         				$DeviceInfo = json_decode($DeviceInfo, true);
 					$DeviceArray[$Device]['Address'] = $DeviceInfo['address'];
