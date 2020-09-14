@@ -122,6 +122,7 @@
 	
 	function GetDeviceInstanceID(string $DeviceID, string $Type)
 	{
+		$this->SendDebug("GetDeviceInstanceID", "Device ID: ".$DeviceID." Typ: ".$Type, 0);
 		If ($Type == "DS18B20") {
 			$guid = "{11809B39-06FB-EBB8-7671-7C36CBC3FFDF}";
 		}
