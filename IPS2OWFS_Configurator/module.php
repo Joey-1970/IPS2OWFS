@@ -1,6 +1,6 @@
 <?
     // Klassendefinition
-    class IPS2TradfriConfigurator extends IPSModule 
+    class IPS2OWFS_Configurator extends IPSModule 
     {
 	    
 	// Überschreibt die interne IPS_Create($id) Funktion
@@ -8,7 +8,7 @@
         {
             	// Diese Zeile nicht löschen.
             	parent::Create();
-		$this->ConnectParent("{562389F8-739F-644A-4FC7-36F2CE3AFE4F}");
+		$this->ConnectParent("{A76DD90C-A117-2100-C84C-452FE558C622}");
 		$this->RegisterPropertyInteger("Category", 0);  
 		
         }
@@ -29,10 +29,7 @@
 		
 		$arrayColumns = array();
 		$arrayColumns[] = array("caption" => "Geräte ID", "name" => "DeviceID", "width" => "100px", "visible" => true);
-		$arrayColumns[] = array("caption" => "Name", "name" => "Name", "width" => "250px", "visible" => true);
 		$arrayColumns[] = array("caption" => "Typ", "name" => "Typ", "width" => "300px", "visible" => true);
-		$arrayColumns[] = array("caption" => "Firmware", "name" => "Firmware", "width" => "150px", "visible" => true);
-		$arrayColumns[] = array("caption" => "Klasse", "name" => "Class", "width" => "auto", "visible" => true);
 		
 		$Category = $this->ReadPropertyInteger("Category");
 		$RootNames = [];
@@ -103,8 +100,8 @@
 	// Beginn der Funktionen
 	private function GetData()
 	{
-		$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{4AA318CB-CA9A-2467-3079-A35AD1577771}", 
-				"Function" => "getDeviceList" )));
+		$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{F1CAC7F7-BA28-F711-7E0E-481F338200A4}", 
+				"Function" => "DeviceList" )));
 		//$this->SendDebug("GetData", $Result, 0);
 		$DeviceArray = unserialize($Result);
 		If (is_array($DeviceArray)) {
@@ -113,15 +110,10 @@
 			$Devices = array();
 			$i = 0;
 			foreach($DeviceArray as $Key => $Device) {
-				$Devices[$i]["Name"] = $Device["Name"];
-				$Devices[$i]["Typ"] = $Device["Typ"];
-				$Devices[$i]["Firmware"] = $Device["Firmware"];
-				$Devices[$i]["Class"] = $Device["Class"];
+				$Devices[$i]["Address"] = $Device["address"];
+				$Devices[$i]["Typ"] = $Device["type"];
 				$Devices[$i]["DeviceID"] = $Key;
-				If (isset($Device["Specification"])) {
-					$Devices[$i]["Specification"] = $Device["Specification"];
-				}
-				$Devices[$i]["Instance"] = $this->GetDeviceInstanceID($Key, $Device["Class"]);
+				$Devices[$i]["Instance"] = 0; //$this->GetDeviceInstanceID($Key, $Device["Class"]);
 				$i = $i + 1;
 			}
 		}
