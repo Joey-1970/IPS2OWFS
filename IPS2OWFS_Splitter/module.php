@@ -102,8 +102,8 @@
     				If (ctype_xdigit ($DeviceFilter) == true) {
         				$DeviceInfo = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$Device);
         				$DeviceInfo = json_decode($DeviceInfo, true);
-					$DeviceArray[$Device]['address'] = $DeviceInfo['address'];
-        				$DeviceArray[$Device]['type'] = $DeviceInfo['type'];
+					$DeviceArray[$Device]['Address'] = $DeviceInfo['address'];
+        				$DeviceArray[$Device]['Type'] = $DeviceInfo['type'];
     				}
    			}
 			$this->SendDebug("DeviceList", serialize($DeviceArray), 0);
