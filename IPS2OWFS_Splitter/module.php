@@ -72,6 +72,7 @@
 	}
 	    
 	// Beginn der Funktionen
+	/*
 	private function DeviceState($DeviceID)
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
@@ -89,7 +90,37 @@
 		return $Content;
 		}
 	}
-	
+	*/
+	    
+	private function DeviceState($DeviceID)
+	{
+		If ($this->ReadPropertyBoolean("Open") == true) {
+			if (IPS_SemaphoreEnter("DeviceState", 3000)) {
+				$GatewayIP = $this->ReadPropertyString("GatewayIP");
+				$Port = $this->ReadPropertyInteger("Port");	
+				
+				$URL = 'http://'.$GatewayIP.':'.$Port.'/json/'.$DeviceID;
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
+				curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+				curl_setopt($ch, CURLOPT_URL, $URL);
+				$Content = curl_exec($ch);
+				//$Content = json_decode($Content, true);
+				//print_r($Content);
+				
+				//$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$DeviceID);
+
+				If ($Content === false) {
+					$this->SendDebug("DeviceState", "Fehler bei der Datenermittlung!", 0);
+					$this->ConnectionTest();
+				}
+			IPS_SemaphoreLeave("DeviceState");
+			}	
+		return $Content;
+		}
+	}
+	    
 	private function DeviceList()
 	{
 		$DeviceArray = array();
@@ -141,12 +172,6 @@
 			$this->SetStatus(202);
 		}
 	return $result;
-	}	
-	
-	  
-	
-
-	
-	 
+	}	 
 }
 ?>
