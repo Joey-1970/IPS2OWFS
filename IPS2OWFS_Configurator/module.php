@@ -122,15 +122,15 @@
 	return serialize($Devices);;
 	}
 	
-	function GetDeviceInstanceID(int $DeviceID, string $Class)
+	function GetDeviceInstanceID(string $DeviceID, string $Type)
 	{
-		If ($Class == "DS18B20") {
+		If ($Type == "DS18B20") {
 			$guid = "{11809B39-06FB-EBB8-7671-7C36CBC3FFDF}";
 		}
-		elseIf ($Class == "Plug") {
+		elseIf ($Type == "Plug") {
 			$guid = "{89756350-E4DB-F332-5B25-979C66F005D5}";
 		}
-		elseIf ($Class == "Blind") {
+		elseIf ($Type == "Blind") {
 			$guid = "{D905AD59-7A30-FDB0-B1C2-FFFE2E2E24F6}";
 		}
 	    	$Result = 0;
