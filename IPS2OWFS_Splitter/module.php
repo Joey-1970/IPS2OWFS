@@ -106,10 +106,6 @@
 				curl_setopt($ch, CURLOPT_TIMEOUT, 2);
 				curl_setopt($ch, CURLOPT_URL, $URL);
 				$Content = curl_exec($ch);
-				//$Content = json_decode($Content, true);
-				//print_r($Content);
-				
-				//$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$DeviceID);
 
 				If ($Content === false) {
 					$this->SendDebug("DeviceState", "Fehler bei der Datenermittlung!", 0);
@@ -120,7 +116,7 @@
 		return $Content;
 		}
 	}
-	    
+	/*   
 	private function DeviceList()
 	{
 		$DeviceArray = array();
@@ -143,6 +139,43 @@
 		}
 	return serialize($DeviceArray);
 	}
+	*/
+	private function DeviceList()
+	{
+		$DeviceArray = array();
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
+			$GatewayIP = $this->ReadPropertyString("GatewayIP");
+			$Port = $this->ReadPropertyInteger("Port");
+			$URL = 'http://'.$GatewayIP.':'.$Port.'/json/';
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+			curl_setopt($ch, CURLOPT_URL, $URL);
+			$Content = curl_exec($ch);
+			
+			$Content = json_decode($Content, true);
+			
+			foreach ($Content as $Device => $Value) {
+    				$DeviceFilter = str_replace(".", "", $Device);
+    				If ((ctype_xdigit ($DeviceFilter) == true) AND (strlen($Device) == 15)) {
+        				$URL = 'http://'.$GatewayIP.':'.$Port.'/json/'.$Device;
+					curl_setopt($ch, CURLOPT_URL, $URL);
+					$DeviceInfo = curl_exec($ch);
+					
+					//$DeviceInfo = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$Device);
+        				
+					
+					$DeviceInfo = json_decode($DeviceInfo, true);
+					$DeviceArray[$Device]['Address'] = $DeviceInfo['address'];
+        				$DeviceArray[$Device]['Type'] = $DeviceInfo['type'];
+    				}
+   			}
+			$this->SendDebug("DeviceList", serialize($DeviceArray), 0);
+		}
+	return serialize($DeviceArray);
+	}
+	    
 	    
 	    
 	private function ConnectionTest()
