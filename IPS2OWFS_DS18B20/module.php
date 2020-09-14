@@ -80,7 +80,7 @@
 			case 10100:
 				// IPS_KERNELSTARTED
 				$this->GetState();
-				$this->SetTimerInterval("Timer_1", 1000);
+				$this->SetTimerInterval("Timer_1", 15000);
 				break;
 		}
     	}               
