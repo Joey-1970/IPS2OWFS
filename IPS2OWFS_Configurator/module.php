@@ -67,11 +67,11 @@
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true));
 				}
 				*/
-				$arrayValues[] = array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Name" => $DeviceArray[$i]["Name"], "Type" => $DeviceArray[$i]["Type"],
+				$arrayValues[] = array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Type" => $DeviceArray[$i]["Type"],
 					       "instanceID" => $DeviceArray[$i]["Instance"], "create" => $arrayCreate);
 			}
 			else {
-				$arrayValues[] = array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Name" => $DeviceArray[$i]["Name"], "Type" => $DeviceArray[$i]["Type"],
+				$arrayValues[] = array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Type" => $DeviceArray[$i]["Type"],
 					       "instanceID" => $DeviceArray[$i]["Instance"]);
 			}
 			
