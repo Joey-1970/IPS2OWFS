@@ -21,11 +21,8 @@
 		$this->RegisterPropertyString("DeviceID", "");
 		$this->RegisterTimer("Timer_1", 0, 'IPS2OWFSDS18B20_GetState($_IPS["TARGET"]);');
 		
-		
-		
 		//Status-Variablen anlegen
 		$this->RegisterVariableFloat("Temperature", "Temperatur", "~Temperature", 10);
-		
         }
  	
 	public function GetConfigurationForm() 
@@ -40,10 +37,7 @@
 		$arrayElements[] = array("name" => "Open", "type" => "CheckBox",  "caption" => "Aktiv");
 		$arrayElements[] = array("type" => "ValidationTextBox", "name" => "DeviceID", "caption" => "Device ID");
 		
-		$arrayActions = array(); 
-		
-		
- 		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements, "actions" => $arrayActions)); 		 
+ 		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements)); 		 
  	}       
 	   
         // Überschreibt die intere IPS_ApplyChanges($id) Funktion
@@ -101,9 +95,5 @@
 			}
 		}
 	}
-	
-	
-	
-	
 }
 ?>
