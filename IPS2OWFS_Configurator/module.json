@@ -1,0 +1,14 @@
+{
+  "id": "{4C848B93-ECF3-EEE1-6DA7-C80E4A9690B6}",
+  "name": "IPS2OWFS_Configurator",
+  "type": 4,
+  "vendor": "JP-IPS-Modules",
+  "aliases":
+  [
+    "IPS2OWFS_Configurator"
+  ],
+  "parentRequirements": ["{F1CAC7F7-BA28-F711-7E0E-481F338200A4}"],
+  "childRequirements": [],
+  "implemented": ["{4E023AF0-7B59-FD5F-37EB-AC1BC8CD5EAE}"],
+  "prefix": "IPS2OWFSConfigurator"
+}
