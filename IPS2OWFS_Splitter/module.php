@@ -91,7 +91,7 @@
 	private function DeviceList()
 	{
 		$DeviceArray = array();
-		If ($this->ReadPropertyBoolean("Open") == true) {
+		If ($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true) {
 			$GatewayIP = $this->ReadPropertyString("GatewayIP");
 			$Port = $this->ReadPropertyInteger("Port");
 			$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/');
@@ -99,7 +99,7 @@
 			
 			foreach ($Content as $Device => $Value) {
     				$DeviceFilter = str_replace(".", "", $Device);
-    				If (ctype_xdigit ($DeviceFilter) == true) {
+    				If ((ctype_xdigit ($DeviceFilter) == true) AND (strlen($this->ReadPropertyString("DeviceID")) == 15)) {
         				$DeviceInfo = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$Device);
         				$DeviceInfo = json_decode($DeviceInfo, true);
 					$DeviceArray[$Device]['Address'] = $DeviceInfo['address'];
@@ -128,7 +128,7 @@
 	   			}
 	   			else {
 	   				fclose($status);
-					$this->SendDebug("Netzanbindung", "Port ist geoeffnet", 0);
+					//$this->SendDebug("Netzanbindung", "Port ist geoeffnet", 0);
 					$result = true;
 					$this->SetStatus(102);
 	   			}
