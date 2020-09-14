@@ -91,7 +91,7 @@
 	private function DeviceList()
 	{
 		$DeviceArray = array();
-		If ($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true) {
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 			$GatewayIP = $this->ReadPropertyString("GatewayIP");
 			$Port = $this->ReadPropertyInteger("Port");
 			$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/');
