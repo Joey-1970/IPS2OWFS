@@ -55,16 +55,11 @@
 					$arrayCreate[] = array("moduleID" => "{11809B39-06FB-EBB8-7671-7C36CBC3FFDF}", "location" => $RootNames,
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
-				/*
-				elseIf ($DeviceArray[$i]["Class"] == "Plug") {
-					$arrayCreate[] = array("moduleID" => "{89756350-E4DB-F332-5B25-979C66F005D5}",  "location" => $RootNames,
-					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true));
+				elseif ($DeviceArray[$i]["Type"] == "DS18B20") {
+					$arrayCreate[] = array("moduleID" => "{5E558624-DA9D-1F79-91D6-360C4F71476B}", "location" => $RootNames,
+					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
-				elseIf ($DeviceArray[$i]["Class"] == "Blind") {
-					$arrayCreate[] = array("moduleID" => "{D905AD59-7A30-FDB0-B1C2-FFFE2E2E24F6}",  "location" => $RootNames,
-					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true));
-				}
-				*/
+				
 				$arrayValues[] = array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Type" => $DeviceArray[$i]["Type"],
 					       "instanceID" => $DeviceArray[$i]["Instance"], "create" => $arrayCreate);
 			}
@@ -127,18 +122,14 @@
 			$guid = "{11809B39-06FB-EBB8-7671-7C36CBC3FFDF}";
 			$this->SendDebug("GetDeviceInstanceID", "DS18B20", 0);
 		}
+		elseif ($Type == "DS18S20") {
+			$guid = "{5E558624-DA9D-1F79-91D6-360C4F71476B}";
+			$this->SendDebug("GetDeviceInstanceID", "DS18S20", 0);
+		}
 		else {
 			$Result = 0;
 			return $Result;
 		}
-		/*
-		elseIf ($Type == "Plug") {
-			$guid = "{89756350-E4DB-F332-5B25-979C66F005D5}";
-		}
-		elseIf ($Type == "Blind") {
-			$guid = "{D905AD59-7A30-FDB0-B1C2-FFFE2E2E24F6}";
-		}
-		*/
 	    	$Result = 0;
 	    	// Modulinstanzen suchen
 	    	$InstanceArray = array();
