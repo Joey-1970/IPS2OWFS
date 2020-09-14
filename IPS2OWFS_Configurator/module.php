@@ -110,10 +110,10 @@
 			$Devices = array();
 			$i = 0;
 			foreach($DeviceArray as $Key => $Device) {
-				$Devices[$i]["Address"] = $Device["address"];
-				$Devices[$i]["Typ"] = $Device["type"];
+				$Devices[$i]["Address"] = $Device["Address"];
+				$Devices[$i]["Type"] = $Device["Type"];
 				$Devices[$i]["DeviceID"] = $Key;
-				$Devices[$i]["Instance"] = 0; //$this->GetDeviceInstanceID($Key, $Device["Class"]);
+				$Devices[$i]["Instance"] = $this->GetDeviceInstanceID($Key, $Device["Type"]);
 				$i = $i + 1;
 			}
 		}
@@ -122,8 +122,8 @@
 	
 	function GetDeviceInstanceID(int $DeviceID, string $Class)
 	{
-		If ($Class == "Bulb") {
-			$guid = "{3B0E081A-A63E-7496-E304-A34C00790516}";
+		If ($Class == "DS18B20") {
+			$guid = "{11809B39-06FB-EBB8-7671-7C36CBC3FFDF}";
 		}
 		elseIf ($Class == "Plug") {
 			$guid = "{89756350-E4DB-F332-5B25-979C66F005D5}";
