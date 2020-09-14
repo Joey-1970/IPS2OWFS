@@ -19,7 +19,7 @@
 		$this->ConnectParent("{A76DD90C-A117-2100-C84C-452FE558C622}");
 		$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyString("DeviceID", "");
-		$this->RegisterTimer("Timer_1", 0, 'IPS2OWFSDS18B20_GetState($_IPS["TARGET"]);');
+		$this->RegisterTimer("Timer_1", 0, 'IPS2OWFSDS18S20_GetState($_IPS["TARGET"]);');
 		
 		//Status-Variablen anlegen
 		$this->RegisterVariableFloat("Temperature", "Temperatur", "~Temperature", 10);
