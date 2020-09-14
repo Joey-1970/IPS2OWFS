@@ -52,7 +52,7 @@
 			$arrayCreate = array();
 			If ($DeviceArray[$i]["Type"] == "DS18B20") {
 				If ($DeviceArray[$i]["Type"] == "DS18B20") {
-					$arrayCreate[] = array("moduleID" => "{3B0E081A-A63E-7496-E304-A34C00790516}", "location" => $RootNames,
+					$arrayCreate[] = array("moduleID" => "{11809B39-06FB-EBB8-7671-7C36CBC3FFDF}", "location" => $RootNames,
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
 				/*
