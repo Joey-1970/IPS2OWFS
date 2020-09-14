@@ -10,7 +10,6 @@
             	parent::Create();
 		$this->ConnectParent("{A76DD90C-A117-2100-C84C-452FE558C622}");
 		$this->RegisterPropertyInteger("Category", 0);  
-		
         }
  	
 	public function GetConfigurationForm() 
