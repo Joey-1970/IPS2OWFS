@@ -75,15 +75,17 @@
 	private function DeviceState($DeviceID)
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
-			$GatewayIP = $this->ReadPropertyString("GatewayIP");
-			$Port = $this->ReadPropertyInteger("Port");				
-			$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$DeviceID);
-			
-			If ($Content === false) {
-				$this->SendDebug("DeviceState", "Fehler bei der Datenermittlung!", 0);
-				$this->ConnectionTest();
-			}
-					
+			if (IPS_SemaphoreEnter("DeviceState", 3000)) {
+				$GatewayIP = $this->ReadPropertyString("GatewayIP");
+				$Port = $this->ReadPropertyInteger("Port");				
+				$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$DeviceID);
+
+				If ($Content === false) {
+					$this->SendDebug("DeviceState", "Fehler bei der Datenermittlung!", 0);
+					$this->ConnectionTest();
+				}
+			IPS_SemaphoreLeave("DeviceState");
+			}	
 		return $Content;
 		}
 	}
