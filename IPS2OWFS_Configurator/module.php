@@ -29,7 +29,7 @@
 		
 		$arrayColumns = array();
 		$arrayColumns[] = array("caption" => "Geräte ID", "name" => "DeviceID", "width" => "100px", "visible" => true);
-		$arrayColumns[] = array("caption" => "Typ", "name" => "Typ", "width" => "300px", "visible" => true);
+		$arrayColumns[] = array("caption" => "Typ", "name" => "Type", "width" => "300px", "visible" => true);
 		
 		$Category = $this->ReadPropertyInteger("Category");
 		$RootNames = [];
@@ -53,10 +53,11 @@
 			If (($DeviceArray[$i]["DeviceID"] >= 65537) AND 
 			    ($DeviceArray[$i]["Class"] <> "Unknown") AND 
 			    ($DeviceArray[$i]["Class"] <> "MotionSensor")) {
-				If ($DeviceArray[$i]["Class"] == "Bulb") {
+				If ($DeviceArray[$i]["Type"] == "DS18B20") {
 					$arrayCreate[] = array("moduleID" => "{3B0E081A-A63E-7496-E304-A34C00790516}", "location" => $RootNames,
-					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true, "DeviceSpecification" => $DeviceArray[$i]["Specification"]));
+					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
+				/*
 				elseIf ($DeviceArray[$i]["Class"] == "Plug") {
 					$arrayCreate[] = array("moduleID" => "{89756350-E4DB-F332-5B25-979C66F005D5}",  "location" => $RootNames,
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true));
@@ -65,16 +66,17 @@
 					$arrayCreate[] = array("moduleID" => "{D905AD59-7A30-FDB0-B1C2-FFFE2E2E24F6}",  "location" => $RootNames,
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true));
 				}
-				$arrayValues[] = array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Name" => $DeviceArray[$i]["Name"], "Firmware" => $DeviceArray[$i]["Firmware"], "Class" => $DeviceArray[$i]["Class"], "Typ" => $DeviceArray[$i]["Typ"],
+				*/
+				$arrayValues[] = array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Name" => $DeviceArray[$i]["Name"], "Type" => $DeviceArray[$i]["Type"],
 					       "instanceID" => $DeviceArray[$i]["Instance"], "create" => $arrayCreate);
 			}
 			else {
-				$arrayValues[] = array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Name" => $DeviceArray[$i]["Name"], "Firmware" => $DeviceArray[$i]["Firmware"], "Class" => $DeviceArray[$i]["Class"], "Typ" => $DeviceArray[$i]["Typ"],
+				$arrayValues[] = array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Name" => $DeviceArray[$i]["Name"], "Type" => $DeviceArray[$i]["Type"],
 					       "instanceID" => $DeviceArray[$i]["Instance"]);
 			}
 			
 		}	
-		$arrayElements[] = array("type" => "Configurator", "name" => "DeviceList", "caption" => "Tradri-Geräte", "rowCount" => 10, "delete" => false, "sort" => $arraySort, "columns" => $arrayColumns, "values" => $arrayValues);
+		$arrayElements[] = array("type" => "Configurator", "name" => "DeviceList", "caption" => "OneWire-Geräte", "rowCount" => 10, "delete" => false, "sort" => $arraySort, "columns" => $arrayColumns, "values" => $arrayValues);
 
 		$arrayElements[] = array("type" => "Label", "label" => "_____________________________________________________________________________________________________");
 		
