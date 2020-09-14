@@ -58,7 +58,6 @@
 			If ($this->ReadPropertyString("DeviceID") <> "") {
 				$this->SetStatus(102);
 				If (IPS_GetKernelRunlevel() == KR_READY) {
-					
 					$this->GetState();
 					$this->SetTimerInterval("Timer_1", 15000);
 				}
@@ -83,24 +82,8 @@
 				$this->GetState();
 				$this->SetTimerInterval("Timer_1", 1000);
 				break;
-			
 		}
     	}               
-	    
-	public function RequestAction($Ident, $Value) 
-	{
-  		switch($Ident) {
-	        case "Position":
-	            	$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{F1CAC7F7-BA28-F711-7E0E-481F338200A4}", 
-				"Function" => "Blind", "DeviceID" => $this->ReadPropertyInteger("DeviceID"), "Value" => $Value )));
-	            	SetValueFloat($this->GetIDForIdent($Ident), $Value);
-			$this->GetState();
-		break;
-		
-	        default:
-	            throw new Exception("Invalid Ident");
-	    }
-	}
 	    
 	// Beginn der Funktionen
 	public function GetState()
@@ -108,11 +91,14 @@
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{F1CAC7F7-BA28-F711-7E0E-481F338200A4}", 
 					"Function" => "DeviceState", "DeviceID" => $this->ReadPropertyString("DeviceID") )));
-			//$this->SendDebug("GetState", "Ergebnis: ".$Result, 0);
-			$Content = json_decode($Result);
-			$this->SendDebug("GetState", "Temperatur: ".$Content->temperature, 0);	
-			$this->SetValue("Temperature", $Content->temperature);
-			
+			$Content = json_decode($Result, true);
+			If (is_array($Content) == true) {
+				$this->SendDebug("GetState", "Temperatur: ".$Content['temperature'], 0);	
+				$this->SetValue("Temperature", $Content['temperature']);
+			}
+			else {
+				$this->SendDebug("GetState", "Temperatur: Fehlerhafte Datenermittlung!", 0);
+			}
 		}
 	}
 	
