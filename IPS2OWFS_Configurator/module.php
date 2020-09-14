@@ -28,8 +28,8 @@
 		$arraySort = array("column" => "DeviceID", "direction" => "ascending");
 		
 		$arrayColumns = array();
-		$arrayColumns[] = array("caption" => "Geräte ID", "name" => "DeviceID", "width" => "100px", "visible" => true);
-		$arrayColumns[] = array("caption" => "Typ", "name" => "Type", "width" => "300px", "visible" => true);
+		$arrayColumns[] = array("caption" => "Geräte ID", "name" => "DeviceID", "width" => "300px", "visible" => true);
+		$arrayColumns[] = array("caption" => "Typ", "name" => "Type", "width" => "auto", "visible" => true);
 		
 		$Category = $this->ReadPropertyInteger("Category");
 		$RootNames = [];
