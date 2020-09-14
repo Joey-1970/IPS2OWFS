@@ -125,20 +125,28 @@
 		$this->SendDebug("GetDeviceInstanceID", "Device ID: ".$DeviceID." Typ: ".$Type, 0);
 		If ($Type == "DS18B20") {
 			$guid = "{11809B39-06FB-EBB8-7671-7C36CBC3FFDF}";
+			$this->SendDebug("GetDeviceInstanceID", "DS18B20", 0);
 		}
+		else {
+			$Result = 0;
+			return $Result;
+		}
+		/*
 		elseIf ($Type == "Plug") {
 			$guid = "{89756350-E4DB-F332-5B25-979C66F005D5}";
 		}
 		elseIf ($Type == "Blind") {
 			$guid = "{D905AD59-7A30-FDB0-B1C2-FFFE2E2E24F6}";
 		}
+		*/
 	    	$Result = 0;
 	    	// Modulinstanzen suchen
 	    	$InstanceArray = array();
 	    	$InstanceArray = @(IPS_GetInstanceListByModuleID($guid));
+		$this->SendDebug("GetDeviceInstanceID", "Anzahl: ".count($InstanceArray), 0);
 	    	If (is_array($InstanceArray)) {
 			foreach($InstanceArray as $Module) {
-				If (strtolower(IPS_GetProperty($Module, "DeviceID")) == $DeviceID) {
+				If (IPS_GetProperty($Module, "DeviceID") == $DeviceID) {
 					$this->SendDebug("GetDeviceInstanceID", "Gefundene Instanz: ".$Module, 0);
 					$Result = $Module;
 					break;
