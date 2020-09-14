@@ -76,6 +76,7 @@
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
 			if (IPS_SemaphoreEnter("DeviceState", 3000)) {
+				$this->SendDebug("DeviceState", "Datenermittlung Device: ".$DeviceID, 0);
 				$GatewayIP = $this->ReadPropertyString("GatewayIP");
 				$Port = $this->ReadPropertyInteger("Port");	
 				
