@@ -72,26 +72,6 @@
 	}
 	    
 	// Beginn der Funktionen
-	/*
-	private function DeviceState($DeviceID)
-	{
-		If ($this->ReadPropertyBoolean("Open") == true) {
-			if (IPS_SemaphoreEnter("DeviceState", 3000)) {
-				$GatewayIP = $this->ReadPropertyString("GatewayIP");
-				$Port = $this->ReadPropertyInteger("Port");				
-				$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$DeviceID);
-
-				If ($Content === false) {
-					$this->SendDebug("DeviceState", "Fehler bei der Datenermittlung!", 0);
-					$this->ConnectionTest();
-				}
-			IPS_SemaphoreLeave("DeviceState");
-			}	
-		return $Content;
-		}
-	}
-	*/
-	    
 	private function DeviceState($DeviceID)
 	{
 		If ($this->ReadPropertyBoolean("Open") == true) {
@@ -116,30 +96,7 @@
 		return $Content;
 		}
 	}
-	/*   
-	private function DeviceList()
-	{
-		$DeviceArray = array();
-		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
-			$GatewayIP = $this->ReadPropertyString("GatewayIP");
-			$Port = $this->ReadPropertyInteger("Port");
-			$Content = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/');
-			$Content = json_decode($Content, true);
-			
-			foreach ($Content as $Device => $Value) {
-    				$DeviceFilter = str_replace(".", "", $Device);
-    				If ((ctype_xdigit ($DeviceFilter) == true) AND (strlen($Device) == 15)) {
-        				$DeviceInfo = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$Device);
-        				$DeviceInfo = json_decode($DeviceInfo, true);
-					$DeviceArray[$Device]['Address'] = $DeviceInfo['address'];
-        				$DeviceArray[$Device]['Type'] = $DeviceInfo['type'];
-    				}
-   			}
-			$this->SendDebug("DeviceList", serialize($DeviceArray), 0);
-		}
-	return serialize($DeviceArray);
-	}
-	*/
+	
 	private function DeviceList()
 	{
 		$DeviceArray = array();
@@ -162,10 +119,6 @@
         				$URL = 'http://'.$GatewayIP.':'.$Port.'/json/'.$Device;
 					curl_setopt($ch, CURLOPT_URL, $URL);
 					$DeviceInfo = curl_exec($ch);
-					
-					//$DeviceInfo = file_get_contents('http://'.$GatewayIP.':'.$Port.'/json/'.$Device);
-        				
-					
 					$DeviceInfo = json_decode($DeviceInfo, true);
 					$DeviceArray[$Device]['Address'] = $DeviceInfo['address'];
         				$DeviceArray[$Device]['Type'] = $DeviceInfo['type'];
