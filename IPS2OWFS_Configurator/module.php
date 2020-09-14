@@ -43,7 +43,7 @@
 		$RootNames = array_reverse($RootNames);
 		
 		$DeviceArray = array();
-		If ($this->HasActiveParent() == true) {
+		If (($this->HasActiveParent() == true) AND (IPS_GetKernelRunlevel() == KR_READY)) {
 			$DeviceArray = unserialize($this->GetData());
 		}
 		$arrayValues = array();
