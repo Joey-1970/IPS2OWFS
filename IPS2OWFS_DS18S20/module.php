@@ -1,14 +1,7 @@
 <?
-    // Klassendefinition
-    class IPS2OWFS_DS18S20 extends IPSModule 
-    {
-	public function Destroy() 
-	{
-		//Never delete this line!
-		parent::Destroy();
-		$this->SetTimerInterval("Timer_1", 0);
-	}  
-	    
+// Klassendefinition
+class IPS2OWFS_DS18S20 extends IPSModule 
+{
 	// Überschreibt die interne IPS_Create($id) Funktion
         public function Create() 
         {
