@@ -73,8 +73,7 @@
 		switch ($Message) {
 			case 10100:
 				// IPS_KERNELSTARTED
-				$this->GetState();
-				$this->SetTimerInterval("Timer_1", 15000);
+				$this->ApplyChanges();
 				break;
 		}
     	}               
