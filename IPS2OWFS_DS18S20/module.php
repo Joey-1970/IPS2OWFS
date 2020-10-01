@@ -7,7 +7,7 @@ class IPS2OWFS_DS18S20 extends IPSModule
         {
             	// Diese Zeile nicht löschen.
             	parent::Create();
-		$this->RegisterMessage(0, IPS_KERNELMESSAGE);
+		$this->RegisterMessage(0, IPS_KERNELSTARTED);
 		
 		$this->ConnectParent("{A76DD90C-A117-2100-C84C-452FE558C622}");
 		$this->RegisterPropertyBoolean("Open", false);
@@ -64,7 +64,7 @@ class IPS2OWFS_DS18S20 extends IPSModule
 	public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     	{
 		switch ($Message) {
-			case 10100:
+			case 10001:
 				// IPS_KERNELSTARTED
 				$this->ApplyChanges()();
 				break;
