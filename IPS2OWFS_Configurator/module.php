@@ -83,10 +83,14 @@
 		
 		If (IPS_GetKernelRunlevel() == 10103) {	
 			If ($this->HasActiveParent() == true) {
-				$this->SetStatus(102);
+				If ($this->GetStatus() <> 102) {
+					$this->SetStatus(102);
+				}
 			}
 			else {
-				$this->SetStatus(104);
+				If ($this->GetStatus() <> 104) {
+					$this->SetStatus(104);
+				}
 			}
 		}
 	}
@@ -99,7 +103,9 @@
 		//$this->SendDebug("GetData", $Result, 0);
 		$DeviceArray = unserialize($Result);
 		If (is_array($DeviceArray)) {
-			$this->SetStatus(102);
+			If ($this->GetStatus() <> 102) {
+				$this->SetStatus(102);
+			}
 			$this->SendDebug("GetData", $Result, 0);
 			$Devices = array();
 			$i = 0;
