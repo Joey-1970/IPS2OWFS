@@ -1,0 +1,14 @@
+{
+  "id": "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}",
+  "name": "IPS2OWFS_DS2431",
+  "type": 3,
+  "vendor": "JP-IPS-Modules",
+  "aliases":
+  [
+    "IPS2OWFS_DS18S20"
+  ],
+  "parentRequirements": ["{F1CAC7F7-BA28-F711-7E0E-481F338200A4}"],
+  "childRequirements": [],
+  "implemented": ["{4E023AF0-7B59-FD5F-37EB-AC1BC8CD5EAE}"],
+  "prefix": "IPS2OWFSDS2431"
+}
