@@ -59,7 +59,7 @@
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
 				elseif ($DeviceArray[$i]["Type"] == "DS2431") {
-					$arrayCreate[] = array("moduleID" => "{5E558624-DA9D-1F79-91D6-360C4F71476B}", "location" => $RootNames,
+					$arrayCreate[] = array("moduleID" => "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}", "location" => $RootNames,
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
 				
@@ -134,6 +134,10 @@
 		elseif ($Type == "DS18S20") {
 			$guid = "{5E558624-DA9D-1F79-91D6-360C4F71476B}";
 			$this->SendDebug("GetDeviceInstanceID", "DS18S20", 0);
+		}
+		elseif ($Type == "DS2431") {
+			$guid = "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}";
+			$this->SendDebug("GetDeviceInstanceID", "DS2431", 0);
 		}
 		else {
 			$Result = 0;
