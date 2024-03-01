@@ -49,12 +49,16 @@
 		for ($i = 0; $i < Count($DeviceArray); $i++) {
 			
 			$arrayCreate = array();
-			If (($DeviceArray[$i]["Type"] == "DS18B20") OR ($DeviceArray[$i]["Type"] == "DS18S20")) {
+			If (($DeviceArray[$i]["Type"] == "DS18B20") OR ($DeviceArray[$i]["Type"] == "DS18S20") OR ($DeviceArray[$i]["Type"] == "DS2431") ) {
 				If ($DeviceArray[$i]["Type"] == "DS18B20") {
 					$arrayCreate[] = array("moduleID" => "{11809B39-06FB-EBB8-7671-7C36CBC3FFDF}", "location" => $RootNames,
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
 				elseif ($DeviceArray[$i]["Type"] == "DS18S20") {
+					$arrayCreate[] = array("moduleID" => "{5E558624-DA9D-1F79-91D6-360C4F71476B}", "location" => $RootNames,
+					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
+				}
+				elseif ($DeviceArray[$i]["Type"] == "DS2431") {
 					$arrayCreate[] = array("moduleID" => "{5E558624-DA9D-1F79-91D6-360C4F71476B}", "location" => $RootNames,
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
