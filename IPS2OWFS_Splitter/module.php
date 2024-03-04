@@ -127,8 +127,18 @@
 					curl_setopt($ch, CURLOPT_URL, $URL);
 					$DeviceInfo = curl_exec($ch);
 					$DeviceInfo = json_decode($DeviceInfo, true);
-					$DeviceArray[$Device]['Address'] = $DeviceInfo['address'];
-        				$DeviceArray[$Device]['Type'] = $DeviceInfo['type'];
+					If (is_null($DeviceInfo['address']) == true {
+						$DeviceArray[$Device]['Address'] = "unknown";
+					}
+					else {
+						$DeviceArray[$Device]['Address'] = $DeviceInfo['address'];
+					}
+					If (is_null($DeviceInfo['Type']) == true {
+        					$DeviceArray[$Device]['Type'] = "unknown";
+					}
+					else {
+						$DeviceArray[$Device]['Type'] = $DeviceInfo['type'];
+					}
     				}
    			}
 			$this->SendDebug("DeviceList", serialize($DeviceArray), 0);
