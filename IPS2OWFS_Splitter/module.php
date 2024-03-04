@@ -133,7 +133,7 @@
 					else {
 						$DeviceArray[$Device]['Address'] = $DeviceInfo['address'];
 					}
-					If (is_null($DeviceInfo['Type']) == true) {
+					If (is_null($DeviceInfo['type']) == true) {
         					$DeviceArray[$Device]['Type'] = "unknown";
 					}
 					else {
