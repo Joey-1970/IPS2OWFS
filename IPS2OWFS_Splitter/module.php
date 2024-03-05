@@ -10,6 +10,7 @@
 		$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyString("GatewayIP", "127.0.0.1");
 		$this->RegisterPropertyInteger("Port", "2121");
+		$this->RegisterPropertyInteger("TimeOut", "2");
         }
  	
 	public function GetConfigurationForm() 
@@ -25,6 +26,7 @@
 		$arrayElements[] = array("type" => "Label", "caption" => "OWFS-Gateway-Zugangsdaten");
 		$arrayElements[] = array("type" => "ValidationTextBox", "name" => "GatewayIP", "caption" => "Gateway IP");
 		$arrayElements[] = array("type" => "NumberSpinner", "name" => "Port", "caption" => "Port", "minimum" => 0, "maximum" => 65535);
+		$arrayElements[] = array("type" => "NumberSpinner", "name" => "TimeOut", "caption" => "Time Out", "minimum" => 2, "maximum" => 20);
 		$arrayActions = array();
 		  	
  		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements, "actions" => $arrayActions)); 		 
@@ -84,13 +86,14 @@
 			if (IPS_SemaphoreEnter("DeviceState", 3000)) {
 				$this->SendDebug("DeviceState", "Datenermittlung Device: ".$DeviceID, 0);
 				$GatewayIP = $this->ReadPropertyString("GatewayIP");
-				$Port = $this->ReadPropertyInteger("Port");	
+				$Port = $this->ReadPropertyInteger("Port");
+				$TimeOut = $this->ReadPropertyInteger("TimeOut");
 				
 				$URL = 'http://'.$GatewayIP.':'.$Port.'/json/'.$DeviceID;
 				$ch = curl_init();
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
-				curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $TimeOut);
+				curl_setopt($ch, CURLOPT_TIMEOUT, $TimeOut);
 				curl_setopt($ch, CURLOPT_URL, $URL);
 				$Content = curl_exec($ch);
 
@@ -110,11 +113,13 @@
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->ConnectionTest() == true)) {
 			$GatewayIP = $this->ReadPropertyString("GatewayIP");
 			$Port = $this->ReadPropertyInteger("Port");
+			$TimeOut = $this->ReadPropertyInteger("TimeOut");
+			
 			$URL = 'http://'.$GatewayIP.':'.$Port.'/json/';
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 2);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $TimeOut);
+			curl_setopt($ch, CURLOPT_TIMEOUT, $TimeOut);
 			curl_setopt($ch, CURLOPT_URL, $URL);
 			$Content = curl_exec($ch);
 			
