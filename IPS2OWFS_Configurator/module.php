@@ -150,6 +150,18 @@
 			$guid = "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}";
 			$this->SendDebug("GetDeviceInstanceID", "DS2431", 0);
 		}
+		elseif ($Type == "DS2408") {
+			$guid = "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}";
+			$this->SendDebug("GetDeviceInstanceID", "DS2408", 0);
+		}
+		elseif ($Type == "DS2438") {
+			$guid = "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}";
+			$this->SendDebug("GetDeviceInstanceID", "DS2438", 0);
+		}
+		elseif ($Type == "DS2450") {
+			$guid = "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}";
+			$this->SendDebug("GetDeviceInstanceID", "DS2450", 0);
+		}
 		else {
 			$Result = 0;
 			return $Result;
