@@ -62,7 +62,18 @@
 					$arrayCreate[] = array("moduleID" => "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}", "location" => $RootNames,
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
-				
+				elseif ($DeviceArray[$i]["Type"] == "DS2408") {
+					$arrayCreate[] = array("moduleID" => "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}", "location" => $RootNames,
+					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
+				}
+				elseif ($DeviceArray[$i]["Type"] == "DS2438") {
+					$arrayCreate[] = array("moduleID" => "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}", "location" => $RootNames,
+					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
+				}
+				elseif ($DeviceArray[$i]["Type"] == "DS2450") {
+					$arrayCreate[] = array("moduleID" => "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}", "location" => $RootNames,
+					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
+				}
 				$arrayValues[] = array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Type" => $DeviceArray[$i]["Type"],
 					       "instanceID" => $DeviceArray[$i]["Instance"], "create" => $arrayCreate);
 			}
