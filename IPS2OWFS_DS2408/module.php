@@ -13,9 +13,15 @@
 		$this->RegisterPropertyBoolean("Open", false);
 		$this->RegisterPropertyString("DeviceID", "");
 		$this->RegisterTimer("Timer_1", 0, 'IPS2OWFSDS2408_GetState($_IPS["TARGET"]);');
+		for ($i = 0; $i <= 7; $i++) {
+			$this->RegisterPropertyBoolean("Function_P".($i), false);
+		}
 		
 		//Status-Variablen anlegen
-		//$this->RegisterVariableFloat("Temperature", "Temperatur", "~Temperature", 10);
+		for ($i = 0; $i <= 7; $i++) {
+			$this->RegisterVariableBoolean("Status_P".($i), "Status P".$i, "~Switch", ($i + 1) * 10);
+			$this->EnableAction("Status_P".($i));
+		}
         }
  	
 	public function GetConfigurationForm() 
@@ -29,6 +35,11 @@
 		$arrayElements = array(); 		
 		$arrayElements[] = array("name" => "Open", "type" => "CheckBox",  "caption" => "Aktiv");
 		$arrayElements[] = array("type" => "ValidationTextBox", "name" => "DeviceID", "caption" => "Device ID");
+		$arrayElements[] = array("type" => "Label", "label" => "Eingang > false, Ausgang > true");
+		for ($i = 0; $i <= 7; $i++) {
+			$arrayElements[] = array("name" => "Function_P".($i), "type" => "CheckBox",  "caption" => "Funktion P".($i));
+		}
+		
 		
  		return JSON_encode(array("status" => $arrayStatus, "elements" => $arrayElements)); 		 
  	}       
@@ -49,6 +60,14 @@
 				If (IPS_GetKernelRunlevel() == KR_READY) {
 					$this->GetState();
 					$this->SetTimerInterval("Timer_1", 15000);
+					for ($i = 0; $i <= 7; $i++) {
+						If ($this->ReadPropertyBoolean("Function_P".$i) == true) {
+							$this->EnableAction("Status_P".$i);
+						}
+						else {
+							$this->DisableAction("Status_P".$i);
+						}
+					}
 				}
 			}
 			else {
