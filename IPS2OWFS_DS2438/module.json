@@ -1,0 +1,14 @@
+{
+  "id": "{9D6106E4-0510-9904-4FDF-A3FC9AEA4E2C}",
+  "name": "IPS2OWFS_DS2438",
+  "type": 3,
+  "vendor": "JP-IPS-Modules",
+  "aliases":
+  [
+    "IPS2OWFS_DS2438"
+  ],
+  "parentRequirements": ["{F1CAC7F7-BA28-F711-7E0E-481F338200A4}"],
+  "childRequirements": [],
+  "implemented": ["{4E023AF0-7B59-FD5F-37EB-AC1BC8CD5EAE}"],
+  "prefix": "IPS2OWFSDS2438"
+}
