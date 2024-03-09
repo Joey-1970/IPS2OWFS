@@ -63,7 +63,7 @@
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
 				elseif ($DeviceArray[$i]["Type"] == "DS2408") {
-					$arrayCreate[] = array("moduleID" => "{F86DB87C-76E5-38AF-0784-51DE8CDDEA41}", "location" => $RootNames,
+					$arrayCreate[] = array("moduleID" => "{11158599-C2FF-A1B7-C78F-28912C9D53DC}", "location" => $RootNames,
 					       "configuration" => array("DeviceID" => $DeviceArray[$i]["DeviceID"], "Open" => true ));
 				}
 				elseif ($DeviceArray[$i]["Type"] == "DS2438") {
