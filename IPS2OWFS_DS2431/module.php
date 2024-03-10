@@ -15,7 +15,7 @@
 		$this->RegisterTimer("Timer_1", 0, 'IPS2OWFSDS2431_GetState($_IPS["TARGET"]);');
 		
 		//Status-Variablen anlegen
-		//$this->RegisterVariableFloat("Temperature", "Temperatur", "~Temperature", 10);
+		$this->RegisterVariableBoolean("State", "Status", "~Presence", 10);
         }
  	
 	public function GetConfigurationForm() 
@@ -85,12 +85,11 @@
 					"Function" => "DeviceState", "DeviceID" => $this->ReadPropertyString("DeviceID") )));
 			$Content = json_decode($Result, true);
 			$this->SendDebug("GetState", serialize($Content), 0);
-			If (is_array($Content) == true) {
-				//$this->SendDebug("GetState", "Temperatur: ".$Content['temperature'], 0);	
-				//$this->SetValue("Temperature", $Content['temperature']);
+			If (is_array($Content) == true) {	
+				$this->SetValue("State", true);
 			}
 			else {
-				//$this->SendDebug("GetState", "Temperatur: Fehlerhafte Datenermittlung!", 0);
+				$this->SetValue("State", false);
 			}
 		}
 	}
