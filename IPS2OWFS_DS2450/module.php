@@ -15,7 +15,10 @@
 		$this->RegisterTimer("Timer_1", 0, 'IPS2OWFSDS2450_GetState($_IPS["TARGET"]);');
 		
 		//Status-Variablen anlegen
-		//$this->RegisterVariableFloat("Temperature", "Temperatur", "~Temperature", 10);
+		$this->RegisterVariableFloat("Input_AIN_A", "Analoger Eingang A", "", 10);
+		$this->RegisterVariableFloat("Input_AIN_B", "Analoger Eingang B", "", 20);
+		$this->RegisterVariableFloat("Input_AIN_C", "Analoger Eingang C", "", 30);
+		$this->RegisterVariableFloat("Input_AIN_D", "Analoger Eingang D", "", 40);
         }
  	
 	public function GetConfigurationForm() 
