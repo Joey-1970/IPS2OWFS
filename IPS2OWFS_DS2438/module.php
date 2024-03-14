@@ -16,10 +16,9 @@
 		
 		//Status-Variablen anlegen
 		$this->RegisterVariableFloat("Temperature", "Temperatur", "~Temperature", 10);
-		$this->RegisterVariableFloat("VAD", "VAD", "", 20);
-          	$this->RegisterVariableFloat("VDD", "VDD", "", 30);
-		// Dazu noch dass passende Profil wählen
-		$this->RegisterVariableFloat("Humidity", "Feuchtigkeit", "", 40);
+		$this->RegisterVariableFloat("VAD", "VAD", "~Volt", 20);
+          	$this->RegisterVariableFloat("VDD", "VDD", "~Volt", 30);
+		$this->RegisterVariableFloat("Humidity", "Feuchtigkeit", "~Humidity.F", 40);
         }
  	
 	public function GetConfigurationForm() 
