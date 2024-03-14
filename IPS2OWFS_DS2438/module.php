@@ -15,7 +15,11 @@
 		$this->RegisterTimer("Timer_1", 0, 'IPS2OWFSDS2438_GetState($_IPS["TARGET"]);');
 		
 		//Status-Variablen anlegen
-		//$this->RegisterVariableFloat("Temperature", "Temperatur", "~Temperature", 10);
+		$this->RegisterVariableFloat("Temperature", "Temperatur", "~Temperature", 10);
+		$this->RegisterVariableFloat("VAD", "VAD", "", 20);
+          	$this->RegisterVariableFloat("VDD", "VDD", "", 30);
+		// Dazu noch dass passende Profil wählen
+		$this->RegisterVariableFloat("Humidity", "Feuchtigkeit", "", 40);
         }
  	
 	public function GetConfigurationForm() 
@@ -87,7 +91,11 @@
 			$this->SendDebug("GetState", serialize($Content), 0);
 			If (is_array($Content) == true) {
 				//$this->SendDebug("GetState", "Temperatur: ".$Content['temperature'], 0);	
-				//$this->SetValue("Temperature", $Content['temperature']);
+				$this->SetValue("Temperature", $Content['temperature']);
+				$this->SetValue("VAD", $Content['VAD']);
+				$this->SetValue("VDD", $Content['VDD']);
+				// Hier muss geprüft werden ob das überhaupt vorhanden ist
+				$this->SetValue("Humidity", $Content['humidity']);
 			}
 			else {
 				//$this->SendDebug("GetState", "Temperatur: Fehlerhafte Datenermittlung!", 0);
