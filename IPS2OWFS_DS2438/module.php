@@ -94,8 +94,9 @@
 				$this->SetValue("Temperature", $Content['temperature']);
 				$this->SetValue("VAD", $Content['VAD']);
 				$this->SetValue("VDD", $Content['VDD']);
-				// Hier muss geprüft werden ob das überhaupt vorhanden ist
-				$this->SetValue("Humidity", $Content['humidity']);
+				If (isset($Content['humidity']) == true) {
+					$this->SetValue("Humidity", $Content['humidity']);
+				}
 			}
 			else {
 				//$this->SendDebug("GetState", "Temperatur: Fehlerhafte Datenermittlung!", 0);
