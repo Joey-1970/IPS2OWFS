@@ -119,11 +119,13 @@
 			$Content = json_decode($Result, true);
 			$this->SendDebug("GetState", serialize($Content), 0);
 			If (is_array($Content) == true) {
-				//$this->SendDebug("GetState", "Temperatur: ".$Content['temperature'], 0);	
-				//$this->SetValue("Temperature", $Content['temperature']);
+				for ($i = 0; $i <= 7; $i++) {
+					$this->SetValue("Status_P".($i), $Content['sensed.'.($i)]);
+					$this->SendDebug("GetState", "Status_P".($i)." ".$Content['sensed.'.($i)], 0);	
+				}
 			}
 			else {
-				//$this->SendDebug("GetState", "Temperatur: Fehlerhafte Datenermittlung!", 0);
+				$this->SendDebug("GetState", "Fehlerhafte Datenermittlung!", 0);
 			}
 		}
 	}
