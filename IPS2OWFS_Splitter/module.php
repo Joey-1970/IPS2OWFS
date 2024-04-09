@@ -73,7 +73,7 @@
 				$Result = $this->DeviceState($data->DeviceID);
 				break;
 			case "SetDeviceState":
-				$Result = $this->SetDeviceState($data->DeviceID, $data->Channel, $data->State);
+				$Result = $this->SetDeviceState($data->DeviceID, $data->Channel, $data->Value);
 				break;
 			case "DeviceList":
 				$Result = $this->DeviceList();
@@ -105,6 +105,42 @@
 					$this->ConnectionTest();
 				}
 			IPS_SemaphoreLeave("DeviceState");
+			}	
+		return $Content;
+		}
+	}
+
+	private function SetDeviceState($DeviceID, $Channel, $State)
+	{
+		If ($this->ReadPropertyBoolean("Open") == true) {
+			
+			if (IPS_SemaphoreEnter("SetDeviceState", 3000)) {
+				$this->SendDebug("SetDeviceState", "Device: ".$DeviceID." Channel: ".$Channel." Value: ".$Value, 0);
+				$GatewayIP = $this->ReadPropertyString("GatewayIP");
+				$Port = $this->ReadPropertyInteger("Port");
+				$TimeOut = $this->ReadPropertyInteger("TimeOut");
+				/*
+				Port einschalten:
+				http://owfs.fritz.box:2121/29.D1651A000000?PIO.0=on&PIO.0=CHANGE
+				Port ausschalten:
+				http://owfs.fritz.box:2121/29.D1651A000000?PIO.0=off&PIO.0=CHANGE
+				Mögliche Ports: PIO.0 - PIO.7
+				*/
+
+				$URL = 'http://'.$GatewayIP.':'.$Port.'/'.$DeviceID;
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $TimeOut);
+				curl_setopt($ch, CURLOPT_TIMEOUT, $TimeOut);
+				curl_setopt($ch, CURLOPT_URL, $URL);
+				$Content = curl_exec($ch);
+
+				If ($Content === false) {
+					$this->SendDebug("DeviceState", "Fehler bei der Datenermittlung!", 0);
+					$this->ConnectionTest();
+				}
+				
+			IPS_SemaphoreLeave("SetDeviceState");
 			}	
 		return $Content;
 		}
