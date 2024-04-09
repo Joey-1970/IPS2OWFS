@@ -119,6 +119,12 @@
 				$GatewayIP = $this->ReadPropertyString("GatewayIP");
 				$Port = $this->ReadPropertyInteger("Port");
 				$TimeOut = $this->ReadPropertyInteger("TimeOut");
+				If ($State==0) {
+					$SwitchState = "off";
+				}
+				elseif ($State==1) {
+					$SwitchState = "on";
+				}
 				/*
 				Port einschalten:
 				http://owfs.fritz.box:2121/29.D1651A000000?PIO.0=on&PIO.0=CHANGE
@@ -127,7 +133,8 @@
 				Mögliche Ports: PIO.0 - PIO.7
 				*/
 				
-				$URL = 'http://'.$GatewayIP.':'.$Port.'/'.$DeviceID.'?PIO.'.$Channel.'=';
+				$URL = 'http://'.$GatewayIP.':'.$Port.'/'.$DeviceID.'?PIO.'.$Channel.'='.$SwitchState.'&PIO.'.$Channel.'=CHANGE';
+				$this->SendDebug("SetDeviceState", "URL: ".$URL, 0);
 				$ch = curl_init();
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $TimeOut);
