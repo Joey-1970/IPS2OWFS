@@ -101,7 +101,7 @@
 		switch($Ident) {
 			case case preg_match('/Status_P.*/', $Ident) ? $Ident : !$Ident:
 				$Channel = substr($Ident, -1, 1);
-				$this->SetState($Channel, $Value,);
+				$this->SetState($Channel, $Value);
 				break;
 			
 			
@@ -128,7 +128,7 @@
 		}
 	}
 
-	public function SetState()
+	public function SetState($Channel, $Value)
 	{
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->HasActiveParent() == true)) {
 			/*
@@ -138,7 +138,8 @@
 			http://owfs.fritz.box:2121/29.D1651A000000?PIO.0=off&PIO.0=CHANGE
 			Mögliche Ports: PIO.0 - PIO.7
 			*/
-			
+			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{F1CAC7F7-BA28-F711-7E0E-481F338200A4}", 
+					"Function" => "SetDeviceState", "DeviceID" => $this->ReadPropertyString("DeviceID"), "Channel" => $Channel, "Value" => $Value )));
 		}
 	}
 }
