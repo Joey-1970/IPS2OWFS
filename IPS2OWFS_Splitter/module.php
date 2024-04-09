@@ -72,6 +72,9 @@
 			case "DeviceState":
 				$Result = $this->DeviceState($data->DeviceID);
 				break;
+			case "SetDeviceState":
+				$Result = $this->SetDeviceState($data->DeviceID, $data->Channel, $data->State);
+				break;
 			case "DeviceList":
 				$Result = $this->DeviceList();
 				break;
