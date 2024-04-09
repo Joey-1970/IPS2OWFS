@@ -130,7 +130,7 @@
 		}
 	}
 
-	public function SetState($Channel, $Value)
+	public function SetState(int $Channel, bool $Value)
 	{
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->HasActiveParent() == true)) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{F1CAC7F7-BA28-F711-7E0E-481F338200A4}", 
