@@ -95,6 +95,20 @@
 				break;
 		}
     	}               
+
+	public function RequestAction($Ident, $Value) 
+	{	
+		switch($Ident) {
+			case case preg_match('/Status_P.*/', $Ident) ? $Ident : !$Ident:
+				$Channel = substr($Ident, -1, 1);
+				$this->SetState($Channel, $Value,);
+				break;
+			
+			
+			default:
+			    throw new Exception("Invalid Ident");
+		}
+	}
 	    
 	// Beginn der Funktionen
 	public function GetState()
@@ -111,6 +125,13 @@
 			else {
 				//$this->SendDebug("GetState", "Temperatur: Fehlerhafte Datenermittlung!", 0);
 			}
+		}
+	}
+
+	public function SetState()
+	{
+		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->HasActiveParent() == true)) {
+			
 		}
 	}
 }
