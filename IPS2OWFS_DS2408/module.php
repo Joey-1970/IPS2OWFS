@@ -135,7 +135,7 @@
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->HasActiveParent() == true)) {
 			$Result = $this->SendDataToParent(json_encode(Array("DataID"=> "{F1CAC7F7-BA28-F711-7E0E-481F338200A4}", 
 					"Function" => "SetDeviceState", "DeviceID" => $this->ReadPropertyString("DeviceID"), "Channel" => $Channel, "Value" => $Value )));
-			
+			$this->GetState();
 		}
 	}
 }
