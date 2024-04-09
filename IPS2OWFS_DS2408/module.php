@@ -131,6 +131,13 @@
 	public function SetState()
 	{
 		If (($this->ReadPropertyBoolean("Open") == true) AND ($this->HasActiveParent() == true)) {
+			/*
+			Port einschalten:
+			http://owfs.fritz.box:2121/29.D1651A000000?PIO.0=on&PIO.0=CHANGE
+			Port ausschalten:
+			http://owfs.fritz.box:2121/29.D1651A000000?PIO.0=off&PIO.0=CHANGE
+			Mögliche Ports: PIO.0 - PIO.7
+			*/
 			
 		}
 	}
