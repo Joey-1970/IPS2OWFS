@@ -126,8 +126,8 @@
 				http://owfs.fritz.box:2121/29.D1651A000000?PIO.0=off&PIO.0=CHANGE
 				Mögliche Ports: PIO.0 - PIO.7
 				*/
-
-				$URL = 'http://'.$GatewayIP.':'.$Port.'/'.$DeviceID;
+				
+				$URL = 'http://'.$GatewayIP.':'.$Port.'/'.$DeviceID.'?PIO.'.$Channel.'=';
 				$ch = curl_init();
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $TimeOut);
